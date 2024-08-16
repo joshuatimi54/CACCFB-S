@@ -2095,8 +2095,12 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
+    body{
+        background-image: url(/images/header/slider.jpg);
+    }
     .BG{
-        height: 40vh;
+        margin-top: 100px;
+        height: 30vh;
     }
     .hero-T{
         font-size: large;
