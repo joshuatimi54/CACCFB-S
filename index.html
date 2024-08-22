@@ -91,11 +91,15 @@
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="wd_guest_formbox">
-					<span>Are You Attending?</span>
+					<span>Registration Close In</span> <br>
+					<span class="timer">05:00:00</span>
 					<h4>Rsvp Here!</h4>
 					<div class="wd_guest_form">
-						<div class="row">
+						<div id="close" class="row">
 							<iframe data-tally-src="https://tally.so/embed/nGLoWp?hideTitle=1" loading="lazy" width="100%" height="480" frameborder="0" marginheight="0" marginwidth="0" title="B&S"></iframe><script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+						</div>
+						<div>
+							<h4 class="open">Registration Closed</h4>
 						</div>
 					</div>
 				</div>
@@ -132,7 +136,7 @@
 </div>
 </div>
 <!-- Testimonial Wrapper End -->
-<!--main js file start--> 
+<!--main js file start-->
 <script type="text/javascript" src="js/jquery.js"></script> 
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/owl.carousel.js"></script>
@@ -162,6 +166,48 @@ $(window).on("load", function() {
 		});
 		wow.init();
 	});
+</script>
+<script>
+	// Set the current time to 22/8/2024, 14:00
+	let currentTime = 1724335200000; // Unix timestamp for 22/8/2024, 14:00
+
+	// Set the countdown time (5 hours from currentTime)
+	let countdownTime = currentTime + 5 * 60 * 60 * 1000; // 5 hours in the future
+
+	// Get the elements where the timer and close div will be displayed
+	let timerElement = document.querySelector('.timer');
+	let closeElement = document.querySelector('#close');
+	let openElement = document.querySelector('.open');
+
+	// Update the countdown every second
+	let countdownInterval = setInterval(function() {
+		// Calculate the current time
+		let now = new Date().getTime();
+
+		// Calculate the remaining time
+		let distance = countdownTime - now;
+
+		let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+		// Format the time as HH:MM:SS
+		let timeFormat = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+		// Display the result in the timer element
+		timerElement.textContent = timeFormat;
+
+		// Check if the countdown is finished
+		if (distance < 0) {
+			clearInterval(countdownInterval);
+			timerElement.textContent = "00:00:00";
+
+			// Hide the close div
+			closeElement.style.display = "none";
+			//show close message
+			openElement.style.display = "block";
+		}
+	}, 1000);
 </script>
 <!--main js file end-->
 </body>

@@ -29,6 +29,9 @@ body, html{
 	overflow-x: hidden;
 }
 /*---------- Custom Css Start -------*/
+.open{
+    display: none;
+}
 a {
 	color: #797979;
 	text-decoration: none;
